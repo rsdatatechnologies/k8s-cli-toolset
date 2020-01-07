@@ -108,5 +108,9 @@ RUN rm -fr /tmp/install-utils \
     && echo "alias k=kubectl" >> ~/.bashrc \
     && echo "complete -o default -F __start_kubectl k" >> ~/.bashrc
 
+# Install Make for makefiles
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential
+
 WORKDIR /workspace
 CMD bash
