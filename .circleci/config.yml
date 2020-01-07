@@ -11,14 +11,14 @@ jobs:
           name: Build application Docker image
           command: |
             docker build \
-              -t rsdata/k8s-cli-toolset:latest .
+              -t rsdatatechnologies/k8s-cli-toolset:latest .
       - deploy:
           name: Push Docker image
           command: |
             docker login -u $DOCKERCLOUD_USER -p $DOCKERCLOUD_PASS
-            docker tag rsdata/k8s-cli-toolset:latest rsdata/k8s-cli-toolset:$CIRCLE_SHA1
-            docker push rsdata/k8s-cli-toolset:latest
-            docker push rsdata/k8s-cli-toolset:$CIRCLE_SHA1
+            docker tag rsdatatechnologies/k8s-cli-toolset:latest rsdatatechnologies/k8s-cli-toolset:$CIRCLE_SHA1
+            docker push rsdatatechnologies/k8s-cli-toolset:latest
+            docker push rsdatatechnologies/k8s-cli-toolset:$CIRCLE_SHA1
 
 workflows:
   version: 2
