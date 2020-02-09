@@ -107,7 +107,12 @@ RUN curl -L https://github.com/jonmosco/kube-ps1/archive/v$KUBE_PS1_VERSION.tar.
 
 RUN curl -OL https://github.com/digitalocean/doctl/releases/download/v1.38.0/doctl-1.38.0-linux-386.tar.gz \
     && tar xf ./doctl-1.38.0-linux-386.tar.gz \
-    && mv ./doctl /usr/local/bin
+    && mv ./doctl /usr/local/bin \
+    && rm -rf doctl-1.38.0-linux-386.tar.gz
+
+RUN curl -OL https://github.com/wercker/stern/releases/download/1.11.0/stern_linux_amd64 \
+    && chmod +x ./stern_linux_amd64 \
+    && mv ./stern_linux_amd64 /usr/local/bin
 
 COPY ./kubectl_aliases /root/.alias/kubectl_aliases
 
