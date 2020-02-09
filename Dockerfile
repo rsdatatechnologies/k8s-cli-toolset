@@ -30,6 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         curl \
         git \
         jq \
+        build-essential \
         less \
         vim \
     && echo ". /etc/bash_completion" >> ~/.bashrc \
@@ -104,20 +105,18 @@ RUN curl -L https://github.com/jonmosco/kube-ps1/archive/v$KUBE_PS1_VERSION.tar.
     && echo "source ~/k8s-prompt/k8s-cli-ps1.sh" >> ~/.bashrc \
     && echo "PROMPT_COMMAND=\"_kube_ps1_update_cache && k8s_cli_ps1\"" >> ~/.bashrc 
 
-COPY ./kubectl_aliases ~/.alias/kubectl_aliases
+RUN curl -OL https://github.com/digitalocean/doctl/releases/download/v1.38.0/doctl-1.38.0-linux-386.tar.gz \
+    && tar xf ./doctl-1.38.0-linux-386.tar.gz \
+    && mv ./doctl /usr/local/bin
+
+COPY ./kubectl_aliases /root/.alias/kubectl_aliases
 
 RUN rm -fr /tmp/install-utils \
     && echo "alias k=kubectl" >> ~/.bashrc \
     && echo "source ~/.alias/kubectl_aliases"  >> ~/.bashrc \
     && echo "complete -o default -F __start_kubectl k" >> ~/.bashrc
 
-# Install Make for makefiles
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential
-
-RUN curl -OL https://github.com/digitalocean/doctl/releases/download/v1.38.0/doctl-1.38.0-linux-386.tar.gz \
-    && tar xf ./doctl-1.38.0-linux-386.tar.gz \
-    && mv ./doctl /usr/local/bin
+# Install Make for makefiles    
 
 WORKDIR /workspace
 CMD bash
