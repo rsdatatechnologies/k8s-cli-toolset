@@ -112,7 +112,7 @@ RUN rm -fr /tmp/install-utils \
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential
 
-RUN wget https://github.com/digitalocean/doctl/releases/download/v1.38.0/doctl-1.38.0-darwin-amd64.tar.gz \
+RUN curl -OL https://github.com/digitalocean/doctl/releases/download/v1.38.0/doctl-1.38.0-darwin-amd64.tar.gz \
     && tar xf ./doctl-1.38.0-darwin-amd64.tar.gz \
     && mv ./doctl /usr/local/bin
 
