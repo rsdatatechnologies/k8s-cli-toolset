@@ -110,7 +110,10 @@ RUN rm -fr /tmp/install-utils \
 
 # Install Make for makefiles
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential
+        build-essential \
+        snapd
+
+RUN snap install doctl
 
 WORKDIR /workspace
 CMD bash
