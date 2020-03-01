@@ -33,6 +33,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         less \
         vim \
+	nano \
     && echo ". /etc/bash_completion" >> ~/.bashrc \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir -p ~/completions \
